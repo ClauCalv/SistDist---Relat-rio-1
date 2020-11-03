@@ -11,10 +11,10 @@ import java.util.Set;
  * Simple Java Non-blocking IO TCP server.
  *
  */
-public class TCPServer {
+public class TCPServerNIO {
 	/** Well-known server port. */
 	public static int serverPort = 9000;
-	
+
 	public static void main(String[] args) {
 		try {
 			//Channel for server socket
@@ -53,7 +53,7 @@ public class TCPServer {
 						// recording to the selector (reading)
 						client.register(selector, SelectionKey.OP_READ, address);
 					}
-					/* if isReadable = true, then the server is ready to read. */ 
+					/* if isReadable = true, then the server is ready to read. */
 					if (key.isReadable()) {
 						// get client socket channel
 						SocketChannel client = (SocketChannel) key.channel();
@@ -67,12 +67,12 @@ public class TCPServer {
 							//If there is data on buffer do
 							if (read > 0) {
 								//make buffer ready for read
-								buffer.flip();  
+								buffer.flip();
 								//Create a new string input
 								StringBuffer input = new StringBuffer();
 								// read 1 byte at a time
 								while(buffer.hasRemaining()){
-									input.append((char) buffer.get()); 
+									input.append((char) buffer.get());
 								}
 								//Verify if a "quit" command was sent
 								if (input.toString().equals("quit\n")) {
@@ -86,22 +86,22 @@ public class TCPServer {
 									//To uppercase
 									String upperCase = input.toString().toUpperCase();
 									//make buffer ready for writing
-									buffer.clear(); 
+									buffer.clear();
 									//Put the string on the buffer
 									buffer.put(upperCase.getBytes());
-									//Flip the buffer 
+									//Flip the buffer
 									buffer.flip();
 									//Write the data to the socket channel
 									client.write(buffer);
 								}
 							}
-						} catch (Exception e) { 
+						} catch (Exception e) {
 							key.cancel();
 							client.close();
-							e.printStackTrace(); 
-						} //inactive client					
+							e.printStackTrace();
+						} //inactive client
 					}
-				}		
+				}
 			}
 
 		} catch (Exception e) {
