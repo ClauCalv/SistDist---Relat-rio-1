@@ -11,12 +11,12 @@ import java.util.Date;
  */
 public class TCPClient {
 	/** Well-known server port. */
-	public static int serverPort = 9000;    
+	public static int serverPort = 9000;
 	/** Hostname. */
 	public static String hostname = "localhost";
 
 	public static void main (String args[]) throws Exception {
-		// Connect to the server process running at localhhost:serverPort
+		// Connect to the server process running at localhost:serverPort
 		Socket s = new Socket(hostname, serverPort);
 
 		// The next 2 lines create a output stream we can
@@ -27,12 +27,12 @@ public class TCPClient {
 		// The next 2 lines create a buffer reader that
 		// reads from the standard input. (to read stream FROM SERVER)
 		InputStreamReader isrServer = new InputStreamReader(s.getInputStream());
-		BufferedReader serverReader = new BufferedReader(isrServer);      
+		BufferedReader serverReader = new BufferedReader(isrServer);
 
 		//Create buffer reader to read input from user. Read the user input to string 'sentence'
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
-		String sentence;  
-		
+		String sentence;
+
 		//Read the sentence
 		System.out.print("Client$ ");
 		sentence = inFromUser.readLine();
