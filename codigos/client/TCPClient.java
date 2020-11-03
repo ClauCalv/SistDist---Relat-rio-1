@@ -13,7 +13,7 @@ public class TCPClient {
 	/** Well-known server port. */
 	public static int serverPort = 9000;
 	/** Hostname. */
-	public static String hostname = "localhost";
+	public static String hostname = "192.168.0.15";
 
 	public static void main (String args[]) throws Exception {
 		// Connect to the server process running at localhost:serverPort
